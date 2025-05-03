@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Featherflow</title>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Glacial+Indifference&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/IntroImages/chicken.png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Glacial Indifference', sans-serif;
+      background-color: #00291e;
+      color: white;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* ---------- First Section (Landing) ---------- */
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .left,
+    .right {
+      flex: 1;
+      margin: 0;
+      padding: 0;
+      border: none;
+      min-width: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    .left {
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-image: url('/mnt/data/dark-green-color-solid-background-1920x1080.png');
+    }
+
+    .left h1 {
+      font-family: 'League Spartan', sans-serif;
+      font-size: 60px;
+      margin-bottom: 10px;
+    }
+
+    .left h2 {
+      font-family: 'League Spartan', sans-serif;
+      font-size: 80px;
+      margin-bottom: 30px;
+    }
+
+    .left p {
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 550px;
+      margin-bottom: 40px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    button {
+      background-color: white;
+      color: #00291e;
+      border: none;
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #cccccc;
+    }
+
+    .right {
+      background-image: url('IntroImages/Intro.png');
+    }
+
+    /* ---------- Second Section (Why Choose Us) ---------- */
+    .section-2 {
+      background-color: #ffffff;
+      color: #00291e;
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1.fade-in {
+      font-family: 'League Spartan', sans-serif;
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: 36px;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease-in-out;
+    }
+
+    h1.fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .bubble {
+      position: absolute;
+      background-color: #004d3f;
+      border-radius: 50%;
+      opacity: 1.0;
+      z-index: 0;
+      box-shadow: 0 0 15px rgba(0, 255, 170, 0.6);
+      animation: float 10s infinite alternate ease-in-out;
+    }
+
+    .bubble:nth-child(1) {
+      width: 120px;
+      height: 120px;
+      top: 10%;
+      left: 5%;
+      animation-delay: 0s;
+    }
+
+    .bubble:nth-child(2) {
+      width: 100px;
+      height: 100px;
+      top: 30%;
+      left: 85%;
+      animation-delay: 1s;
+    }
+
+    .bubble:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      top: 60%;
+      left: 10%;
+      animation-delay: 2s;
+    }
+
+    .bubble:nth-child(4) {
+      width: 140px;
+      height: 140px;
+      top: 75%;
+      left: 80%;
+      animation-delay: 3s;
+    }
+
+    .bubble:nth-child(5) {
+      width: 90px;
+      height: 90px;
+      top: 40%;
+      left: 40%;
+      animation-delay: 4s;
+    }
+
+    .bubble:nth-child(6) {
+      width: 70px;
+      height: 70px;
+      top: 20%;
+      left: 60%;
+      animation-delay: 5s;
+    }
+
+    .bubble:nth-child(7) {
+      width: 110px;
+      height: 110px;
+      top: 85%;
+      left: 25%;
+      animation-delay: 6s;
+    }
+
+    .bubble:nth-child(8) {
+      width: 100px;
+      height: 100px;
+      top: 50%;
+      left: 70%;
+      animation-delay: 7s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0);
+      }
+
+      100% {
+        transform: translateY(-30px) translateX(20px);
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      padding-left: 190px;
+      padding-right: 190px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease-in-out;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      font-family: 'League Spartan', sans-serif;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #00291e;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #00291e;
+      line-height: 1.5;
+    }
+
+    /* ---------- Third Section (Services) ---------- */
+    .services {
+      background: white;
+      color: #0d3b2e;
+    }
+
+    .hero {
+      background: #0d3b2e;
+      color: white;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin: auto;
+      position: relative;
+    }
+
+    .hero .text {
+      flex: 1 1 50%;
+      padding: 2rem 4rem;
+    }
+
+    .hero h2 {
+      font-size: 3.7rem;
+      margin-bottom: 1rem;
+      font-family: 'League Spartan', sans-serif;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+    }
+
+    .hero .image {
+      flex: 1 1 50%;
+    }
+
+    .hero .image img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 8rem 4rem;
+      font-size: 4rem;
+      font-family: 'League Spartan', sans-serif;
+    }
+
+    .ai-service {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      gap: 2rem;
+    }
+
+    .ai-service .text {
+      flex: 1 1 300px;
+      max-width: 400px;
+    }
+
+    .ai-service video {
+      width: 100%;
+      border-radius: 0px;
+      object-fit: contain;
+    }
+
+    /* Fade-in reusable */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+      }
+    }
+
+    .body-2 {
+      font-family: 'Glacial Indifference', sans-serif;
+      background: white;
+      color: #000;
+    }
+
+    .h2-title {
+      text-align: center;
+      font-size: 48px;
+      color: #013220;
+      margin: 80px 0 50px;
+      font-style: normal;
+      font-weight: normal;
+    }
+
+    .team-container {
+      width: 95%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 100px;
+    }
+
+    .team-member {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      /* Align to right by default */
+      gap: 40px;
+    }
+
+    .team-member:nth-child(even) {
+      justify-content: flex-start;
+      /* Align to left for even items */
+      /* flex-direction: row-reverse; */
+      /* Removed to maintain consistent layout */
+    }
+
+    .photo {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 10px solid #013220;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .text-group {
+      display: flex;
+      flex-direction: column;
+      max-width: 800px;
+    }
+
+    .name {
+      font-family: 'League Spartan', sans-serif;
+      font-weight: bold;
+      font-size: 32px;
+      color: #013220;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .team-member:nth-child(even) .name {
+      text-align: right;
+    }
+
+    .quote-box {
+      background-color: #003b2f;
+      color: white;
+      border-radius: 20px;
+      padding: 35px;
+      font-family: 'League Spartan', sans-serif;
+      font-size: 24px;
+      line-height: 1.8;
+    }
+
+    footer {
+      background-color: white;
+      margin-top: 100px;
+    }
+
+    .footer-dev {
+      text-align: center;
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .footer-bottom {
+      background-color: #101010;
+      color: white;
+      padding: 30px 10%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-family: 'Crimson Text', serif;
+    }
+
+    .footer-section {
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .footer-section span {
+      display: block;
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 16px;
+      margin-top: 8px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .team-member {
+        flex-direction: column !important;
+        align-items: center;
+        text-align: center;
+        justify-content: center !important;
+      }
+
+      .text-group {
+        align-items: center !important;
+      }
+
+      .quote-box {
+        font-size: 18px;
+        padding: 25px;
+      }
+
+      .name {
+        font-size: 24px;
+        text-align: center !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Section 1: Landing -->
+  <div class="container">
+    <div class="left">
+      <h1>welcome to</h1>
+      <h2>featherflow!</h2>
+      <p>Join a community where farming passion meets modern solutions.<br>
+        Here, you'll find expert tips, sustainable practices, and a family of growers who believe in working
+        with nature, not against it.</p>
+      <div class="buttons">
+        <button onclick="document.getElementById('why-choose').scrollIntoView({ behavior: 'smooth' })">SIGN UP</button>
+        <button onclick="document.getElementById('services').scrollIntoView({ behavior: 'smooth' })">LOG IN</button>
+      </div>
+    </div>
+    <div class="right"></div>
+  </div>
+
+  <!-- Section 2: Why Choose Us -->
+  <div class="section-2" id="why-choose">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+    <h1 class="fade-in">WHY SHOULD YOU CHOOSE US?</h1>
+    <div class="grid">
+      <div class="card fade-in"><img src="IntroImages/AboutUs1.jpeg" alt="Expert Knowledge">
+        <h3>EXPERT KNOWLEDGE</h3>
+        <p>Get trusted advice from experienced poultry farmers and veterinarians focused on chicken farming.</p>
+      </div>
+      <div class="card fade-in"><img src="IntroImages/AboutUs2.jpg" alt="Community Support">
+        <h3>COMMUNITY SUPPORT</h3>
+        <p>Join a growing network of chicken farmers ready to share real experiences, tips, and methods.</p>
+      </div>
+      <div class="card fade-in"><img src="IntroImages/AboutUs3.jpg" alt="Sustainable Practices">
+        <h3>SUSTAINABLE POULTRY PRACTICES</h3>
+        <p>Learn methods to raise healthier chickens while caring for the environment and improving farm efficiency.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card fade-in"><img src="IntroImages/AboutUs4.jpeg" alt="Latest Innovations">
+        <h3>LATEST INNOVATIONS</h3>
+        <p>Stay updated with the newest poultry farming technologies, feeding techniques, housing systems, and disease
+          prevention tips.</p>
+      </div>
+      <div class="card fade-in"><img src="IntroImages/AboutUs5.jpeg" alt="All-in-one Platform">
+        <h3>ALL-IN-ONE CHICKEN FARMING PLATFORM</h3>
+        <p>From raising chicks to managing large flocks and selling eggs or meat — Featherflow brings every poultry
+          farming need into one easy space.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Services -->
+  <div class="services" id="services">
+    <section class="hero fade-in">
+      <div class="text">
+        <h2>Empowering Poultry Farmers<br><span>with Technology</span></h2>
+        <p>
+          Empowering poultry farmers with technology boosts efficiency, enhances animal care, and promotes food
+          management. Tools like sensors and mobile apps help monitor health, optimize feeding, and ensure market
+          data—making farming more sustainable and profitable.
+        </p>
+      </div>
+      <div class="image">
+        <img src="IntroImages/Goal.png" alt="Smiling farmer with chicken" />
+      </div>
+    </section>
+
+    <h3 class="section-title fade-in">Exclusive Services</h3>
+
+    <section class="ai-service fade-in">
+      <video autoplay muted loop playsinline>
+        <source src="IntroImages/Slide.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </section>
+  </div>
+
+  <div class="body-2">
+
+    <div class="h2-title">
+      <h2">Meet The Team!</h2>
+    </div>
+
+    <div class="team-container">
+      <div class="team-member">
+        <div class="photo">
+          <img src="IntroImages/Abrar.png" alt="Abrar Habib Adib">
+        </div>
+        <div class="text-group">
+          <div class="name">ABRAR HABIB ADIB</div>
+          <div class="quote-box">“Farmers shouldn’t need a dozen spreadsheets to run their business. Our platform
+            replaces clutter with clarity.”</div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="photo">
+          <img src="IntroImages/Faruk.jpeg" alt="Md. Faruk Ahmed">
+        </div>
+        <div class="text-group">
+          <div class="name">MD. FARUK AHMED</div>
+          <div class="quote-box">“We’re building this to give poultry farmers more control, fewer headaches and
+            real-time insights — all in one place.”</div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="photo">
+          <img src="IntroImages/Farhan.jpeg" alt="S.M Farhan Fuad">
+        </div>
+        <div class="text-group">
+          <div class="name">S.M FARHAN FUAD</div>
+          <div class="quote-box">“The smallest health issue can turn into a big loss. With our system, farmers can act
+            fast and stay ahead.”</div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="photo">
+          <img src="IntroImages/Sumaiya.jpeg" alt="Sumiya Ahasan">
+        </div>
+        <div class="text-group">
+          <div class="name">SUMIYA AHASAN</div>
+          <div class="quote-box">“We’re not just building software—we’re helping farms grow smarter with every click,
+            chart, and alert.”</div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="photo">
+          <img src="IntroImages/Sami.jpeg" alt="S.M Farhan Fuad">
+        </div>
+        <div class="text-group">
+          <div class="name">A.B.M.S. Sami</div>
+          <div class="quote-box">“Good design means less stress. We’re making sure even first-time users can manage
+            their farm like pros.”</div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-dev">© Developed by Team Innovators</div>
+      <div class="footer-bottom">
+        <div class="footer-section">
+          <p>contact us</p>
+          <span>teaminnovatorsbd@gmail.com</span>
+        </div>
+        <div class="footer-section">
+          <p>find us</p>
+          <span>United City, Madani Ave, Dhaka 1212</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Fade In Script -->
+  <script>
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    faders.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+
+</html>
