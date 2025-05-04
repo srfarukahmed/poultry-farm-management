@@ -27,6 +27,7 @@
       justify-content: center;
     }
 
+
     .container {
       width: 90%;
       max-width: 1200px;
@@ -42,17 +43,18 @@
     .left {
       flex: 2;
       position: relative;
-      background:rgba(255, 255, 255, 0.5);;
+      background: rgba(255, 255, 255, 0.5);
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding: 80px 50px;
       z-index: 1;
+      
     }
 
     .left h3 {
       font-family: 'League Spartan', sans-serif;
-      font-size: 1.5rem;
+      font-size: 2.0rem;
       color: white;
     }
 
@@ -74,12 +76,20 @@
       position: absolute;
       width: 750px;
       height: 720px;
-      background-color: #002A1C;
+      background-color: #093124;
       border-radius: 50%;
       top: -270px;
       left: -100px;
       z-index: 1;
-    }
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: left;
+      padding: 150px;
+      overflow: hidden;
+      opacity: 0.9;
+    } 
+
 
     .circle-light {
       position: absolute;
@@ -90,8 +100,8 @@
       bottom: -70px;
       left: -170px;
       z-index: 0;
-      
-      
+      overflow: hidden;
+
     }
 
     .circle-mid {
@@ -106,7 +116,7 @@
       z-index: 0;
       margin-top: 70px;
       margin-left: 150px;
-      overflow-wrap: ;
+      overflow: hidden; 
     }
 
     .right {
@@ -132,7 +142,7 @@
     }
 
     .right p {
-      font-size: 0.9rem;
+      font-size: 0.82rem;
       margin-bottom: 30px;
       text-align: center;
       color: #002A1C;
@@ -142,6 +152,11 @@
       width: 100%;
       max-width: 350px;
       margin-bottom: 20px;
+    }
+
+    .title-crl{
+      padding-top: 200px;
+      justify-items: left;
     }
 
     .input-group input {
@@ -183,7 +198,8 @@
       color: #333;
       width: 100%;
       max-width: 350px;
-      margin: 20px 0;
+      margin: 5px;
+      margin-bottom: 23px;
     }
 
     .separator::before,
@@ -224,18 +240,15 @@
   <div class="container">
     <div class="left">
       <div class="circle-large">
-        <h3>Hey There,</h3>
+        <h3 class="title-crl">Hey There,</h3>
         <h1>Ready to Dive Back In?</h1>
         <p>let’s pick up where you left off</p>
       </div>
       <div class="circle-light"></div>
       <div class="circle-mid"></div>
-      <!-- <h3>Hey There,</h3>
-      <h1>Ready to Dive Back In?</h1>
-      <p>let’s pick up where you left off</p> -->
     </div>
     <div class="right">
-      <a class="logo" href="welcome.html">featherflow</a>
+      <a class="logo" href="index.html">featherflow</a>
       <p>please fill the correct information to enter your work space</p>
       <div class="input-group">
         <input type="text" placeholder="ACCOUNT NAME" />
