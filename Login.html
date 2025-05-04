@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Featherflow Login</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&family=Glacial+Indifference&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/IntroImages/chicken.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Glacial Indifference', sans-serif;
+    }
+
+    body {
+      background: url('IntroImages/Login.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      height: 80vh;
+      display: flex;
+      border-radius: 25px;
+      overflow: hidden;
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(5px);
+      position: relative;
+    }
+
+    .left {
+      flex: 2;
+      position: relative;
+      background:rgba(255, 255, 255, 0.5);;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 50px;
+      z-index: 1;
+    }
+
+    .left h3 {
+      font-family: 'League Spartan', sans-serif;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .left h1 {
+      font-family: 'League Spartan', sans-serif;
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: white;
+      margin: 10px 0;
+    }
+
+    .left p {
+      font-size: 1rem;
+      color: white;
+    }
+
+    /* Circle shapes */
+    .circle-large {
+      position: absolute;
+      width: 950px;
+      height: 800px;
+      background-color: #002A1C;
+      border-radius: 50%;
+      top: -250px;
+      left: -350px;
+      z-index: 1;
+      
+      
+    }
+
+    .circle-light {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      background-color: #80918E;
+      border-radius: 50%;
+      bottom: -100px;
+      left: -120px;
+      z-index: 0;
+      
+      
+    }
+
+    .circle-mid {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background-color: #80918E;
+      border-radius: 50%;
+      top: 40%;
+      left: 200px;
+      transform: translateY(-50%);
+      z-index: 0;
+      margin-top: 70px;
+      margin-left: 150px;
+      overflow-wrap: ;
+    }
+
+    .right {
+      flex: 1;
+      background-color: rgba(255, 255, 255, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      font-family: 'League Spartan', sans-serif;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #002A1C;
+      margin-bottom: 10px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .right p {
+      font-size: 0.9rem;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #002A1C;
+    }
+
+    .input-group {
+      width: 100%;
+      max-width: 350px;
+      margin-bottom: 20px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #002A1C;
+      border-radius: 10px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .input-group input::placeholder {
+      color: #002A1C;
+    }
+
+    .btn {
+      width: 100%;
+      max-width: 350px;
+      padding: 15px;
+      border: none;
+      border-radius: 30px;
+      background-color: #002A1C;
+      color: white;
+      font-size: 1.1rem;
+      font-family: 'League Spartan', sans-serif;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .btn:hover {
+      background-color: #004634;
+    }
+
+    .separator {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #333;
+      width: 100%;
+      max-width: 350px;
+      margin: 20px 0;
+    }
+
+    .separator::before,
+    .separator::after {
+      content: "";
+      flex: 1;
+      border-bottom: 2px solid #444;
+    }
+
+    .separator:not(:empty)::before {
+      margin-right: .75em;
+    }
+
+    .separator:not(:empty)::after {
+      margin-left: .75em;
+    }
+
+    .outline-btn {
+      width: 100%;
+      max-width: 350px;
+      padding: 15px;
+      border-radius: 30px;
+      border: 2px solid #002A1C;
+      background: transparent;
+      color: #002A1C;
+      font-family: 'League Spartan', sans-serif;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .outline-btn:hover {
+      background-color: #e6f0ec;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <div class="circle-large">
+        <h3>Hey There,</h3>
+        <h1>Ready to Dive Back In?</h1>
+        <p>let’s pick up where you left off</p>
+      </div>
+      <div class="circle-light"></div>
+      <div class="circle-mid"></div>
+      <!-- <h3>Hey There,</h3>
+      <h1>Ready to Dive Back In?</h1>
+      <p>let’s pick up where you left off</p> -->
+    </div>
+    <div class="right">
+      <a class="logo" href="welcome.html">featherflow</a>
+      <p>please fill the correct information to enter your work space</p>
+      <div class="input-group">
+        <input type="text" placeholder="ACCOUNT NAME" />
+      </div>
+      <div class="input-group">
+        <input type="password" placeholder="PASSWORD" />
+      </div>
+      <button class="btn">sign in</button>
+      <div class="separator">or</div>
+      <button class="outline-btn">sign up</button>
+    </div>
+  </div>
+</body>
+</html>

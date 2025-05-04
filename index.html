@@ -371,6 +371,7 @@
       font-family: 'Glacial Indifference', sans-serif;
       background: white;
       color: #000;
+      padding-top: 120px;
     }
 
     .h2-title {
@@ -380,11 +381,13 @@
       margin: 80px 0 50px;
       font-style: normal;
       font-weight: normal;
+      margin-top: 0px;
     }
 
     .team-container {
       width: 95%;
-      margin: 0 auto;
+      /* margin: 0 auto; */
+      margin-top: 130px;
       display: flex;
       flex-direction: column;
       gap: 100px;
@@ -418,6 +421,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+     
     }
 
     .text-group {
@@ -438,6 +442,12 @@
     .team-member:nth-child(even) .name {
       text-align: right;
     }
+
+    .team-member:nth-child(even) .text-group{
+      padding-left: 100px;
+    }
+
+    
 
     .quote-box {
       background-color: #003b2f;
@@ -519,8 +529,10 @@
         Here, you'll find expert tips, sustainable practices, and a family of growers who believe in working
         with nature, not against it.</p>
       <div class="buttons">
+        
         <button onclick="document.getElementById('why-choose').scrollIntoView({ behavior: 'smooth' })">SIGN UP</button>
-        <button onclick="document.getElementById('services').scrollIntoView({ behavior: 'smooth' })">LOG IN</button>
+        <!-- <button onclick="document.getElementById('services').scrollIntoView({ behavior: 'smooth' })">LOG IN</button> -->
+        <a href="Login.html"> <button onclick="document.getElementById('services').scrollIntoView({ behavior: 'smooth' })">LOG IN</button></a>
       </div>
     </div>
     <div class="right"></div>
@@ -592,8 +604,10 @@
     </section>
   </div>
 
-  <div class="body-2">
 
+  <!-- Section -4: Details about Team Members -->
+
+  <div class="body-2">
     <div class="h2-title">
       <h2">Meet The Team!</h2>
     </div>
@@ -610,13 +624,14 @@
         </div>
       </div>
       <div class="team-member">
-        <div class="photo">
-          <img src="IntroImages/Faruk.jpeg" alt="Md. Faruk Ahmed">
-        </div>
+      
         <div class="text-group">
           <div class="name">MD. FARUK AHMED</div>
           <div class="quote-box">“We’re building this to give poultry farmers more control, fewer headaches and
             real-time insights — all in one place.”</div>
+        </div>
+        <div class="photo">
+          <img src="IntroImages/Faruk.jpeg" alt="Md. Faruk Ahmed">
         </div>
       </div>
       <div class="team-member">
@@ -630,13 +645,14 @@
         </div>
       </div>
       <div class="team-member">
-        <div class="photo">
-          <img src="IntroImages/Sumaiya.jpeg" alt="Sumiya Ahasan">
-        </div>
+
         <div class="text-group">
           <div class="name">SUMIYA AHASAN</div>
           <div class="quote-box">“We’re not just building software—we’re helping farms grow smarter with every click,
             chart, and alert.”</div>
+        </div>
+        <div class="photo">
+          <img src="IntroImages/Sumaiya.jpeg" alt="Sumiya Ahasan">
         </div>
       </div>
       <div class="team-member">
