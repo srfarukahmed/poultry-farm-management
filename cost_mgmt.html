@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #ffffff;
+      color: #111827;
+    }
+
+    header {
+      background: #00291e;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 0.2rem;
+      font-weight: 700;
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #00291e;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #111827;
+    }
+
+    form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    input,
+    select {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.75rem;
+      background: #006241;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #004f34;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th,
+    td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    .summary {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .category-filter {
+      max-width: 300px;
+      margin-bottom: 1rem;
+    }
+
+
+    .container-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+      
+    }
+
+    .text-content {
+      max-width: 600px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      color: #374151;
+    }
+
+    .cta-button {
+      background-color: #0a2d1f;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 16px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .image-content img {
+      width: 400px;
+    }
+
+
+    .footer {
+      background: #0d0d0d;
+      color: white;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    .footer span,
+    .footer a {
+      display: block;
+      color: white;
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+    }
+
+    .graph-icon {
+      width: 80px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    @media(max-width: 768px) {
+      .summary {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="nav-left">
+      <button class="nav-button">HOME</button>
+      <button class="nav-button">DASHBOARD</button>
+    </div>
+    <div class="nav-right">
+      <button class="nav-button">user2049</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Cost Management &</h1>
+    <h3>Expense Tracking</h3>
+
+    <!-- Daily Expense Logging -->
+    <div class="card">
+      <h2>Daily Expense Logging</h2>
+      <form id="expenseForm">
+        <input type="text" id="desc" placeholder="Description" required />
+        <input type="number" id="amount" placeholder="Amount" required />
+        <select id="category">
+          <option value="Feed">Feed</option>
+          <option value="Medicine">Medicine</option>
+          <option value="Labor">Labor</option>
+          <option value="Maintenance">Maintenance</option>
+          <option value="Revenue">Revenue</option>
+        </select>
+        <input type="date" id="date" required />
+        <button type="submit">Add Entry</button>
+      </form>
+    </div>
+
+    <!-- Category-Based Tracking -->
+    <div class="card">
+      <h2>Expense Records</h2>
+      <select class="category-filter" id="filterCategory">
+        <option value="All">All Categories</option>
+        <option value="Feed">Feed</option>
+        <option value="Medicine">Medicine</option>
+        <option value="Labor">Labor</option>
+        <option value="Maintenance">Maintenance</option>
+        <option value="Revenue">Revenue</option>
+      </select>
+      <table id="expenseTable">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Cost vs Revenue Analysis -->
+    <div class="card">
+      <h2>Cost vs Revenue Analysis</h2>
+      <div class="summary" id="analysisSummary">
+        <span>Total Cost: $0</span>
+        <span>Total Revenue: $0</span>
+        <span>Profit/Loss: $0</span>
+      </div>
+    </div>
+
+    <!-- Financial Summary Generation -->
+    <div class="card">
+      <h2>Financial Summary (Monthly)</h2>
+      <div class="summary" id="monthlySummary">
+        <span>Month: <span id="monthName">May</span></span>
+        <span>Expenses: $0</span>
+        <span>Revenue: $0</span>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="container-cta">
+    <div class="text-content">
+      <h2>Calculate your Sales & Profit</h2>
+      <p>
+        Monitor your revenue streams and expenses effortlessly. Use this tool to calculate your total sales, deduct
+        costs, and gain clear insights into your profit margins—helping you make smarter financial decisions.
+      </p>
+      <button class="cta-button">click here</button>
+    </div>
+    <div class="image-content">
+      <img src="/New folder/Untitled design.png" alt="Growth Chart Icon" />
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Footer -->
+  <div class="footer">
+    <div>
+      <span><strong>contact us</strong></span>
+      <span>✉ teaminnovatorsbd@gmail.com</span>
+      <span>📱 Telegram</span>
+      <span>👤 LinkedIn</span>
+    </div>
+    <div>
+      <span><strong>find us</strong></span>
+      <span>📍 United City, Madani Ave, Dhaka 1212</span>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('expenseForm');
+    const tableBody = document.querySelector('#expenseTable tbody');
+    const filterCategory = document.getElementById('filterCategory');
+    const analysisSummary = document.getElementById('analysisSummary');
+    const monthlySummary = document.getElementById('monthlySummary');
+
+    let entries = [];
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const desc = document.getElementById('desc').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const category = document.getElementById('category').value;
+      const date = document.getElementById('date').value;
+
+      const entry = { desc, amount, category, date };
+      entries.push(entry);
+
+      updateTable();
+      updateSummary();
+      form.reset();
+    });
+
+    filterCategory.addEventListener('change', updateTable);
+
+    function updateTable() {
+      tableBody.innerHTML = '';
+      const filter = filterCategory.value;
+
+      entries
+        .filter(entry => filter === 'All' || entry.category === filter)
+        .forEach(entry => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+          <td>${entry.date}</td>
+          <td>${entry.desc}</td>
+          <td>${entry.category}</td>
+          <td>$${entry.amount.toFixed(2)}</td>
+        `;
+          tableBody.appendChild(row);
+        });
+    }
+
+    function updateSummary() {
+      let cost = 0, revenue = 0;
+      let month = new Date().getMonth();
+      let monthCost = 0, monthRevenue = 0;
+
+      entries.forEach(entry => {
+        const entryMonth = new Date(entry.date).getMonth();
+        if (entry.category === 'Revenue') {
+          revenue += entry.amount;
+          if (entryMonth === month) monthRevenue += entry.amount;
+        } else {
+          cost += entry.amount;
+          if (entryMonth === month) monthCost += entry.amount;
+        }
+      });
+
+      const profit = revenue - cost;
+      const monthName = new Date().toLocaleString('default', { month: 'long' });
+
+      analysisSummary.innerHTML = `
+      <span>Total Cost: $${cost.toFixed(2)}</span>
+      <span>Total Revenue: $${revenue.toFixed(2)}</span>
+      <span>Profit/Loss: $${profit.toFixed(2)}</span>
+    `;
+
+      monthlySummary.innerHTML = `
+      <span>Month: <span id="monthName">${monthName}</span></span>
+      <span>Expenses: $${monthCost.toFixed(2)}</span>
+      <span>Revenue: $${monthRevenue.toFixed(2)}</span>
+    `;
+    }
+  </script>
+
+</body>
+
+</html>

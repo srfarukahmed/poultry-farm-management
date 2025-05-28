@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feather Flow | Labor Management</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 2rem;
+        }
+
+        h1 {
+            margin-bottom: 1rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-container {
+            height: 150px;
+        }
+
+        .performance-section {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .performance-chart {
+            flex: 2;
+            background: white;
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .statistics-list {
+            flex: 1;
+            background: white;
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .bar {
+            height: 6px;
+            width: 100%;
+            background: #ccc;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: #4caf50;
+            width: 85%;
+        }
+
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .filter-bar input {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ccc;
+        }
+
+        .labor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .labor-table th,
+        .labor-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .labor-table th {
+            background-color: #f1f1f1;
+        }
+
+        .status-working {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-leave {
+            color: red;
+            font-weight: bold;
+        }
+
+        .actions button {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            background: #00bcd4;
+            color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        .employee-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .employee-img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #ccc;
+        }
+
+        .green {
+            color: #4caf50;
+        }
+
+        .red {
+            color: #f44336;
+        }
+
+        .present-labor-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .present-labor-section form {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .present-labor-section select {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ccc;
+        }
+
+
+        .attendance-section {
+            background: #cde5cd;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .attendance-section h2 {
+            margin-bottom: 1rem;
+        }
+
+        .attendance-section label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        .attendance-section input,
+        .attendance-section select,
+        .attendance-section button {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.3rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .attendance-section button {
+            background-color: #002920;
+            color: white;
+            border: none;
+            margin-top: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .attendance-summary {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        .attendance-summary h3 {
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        th {
+            background-color: #002920;
+            color: white;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Feather Flow - Labor Management</h1>
+
+    <!-- Dashboard Cards -->
+    <div class="dashboard">
+        <div class="card">
+            <h2>Total Workforce</h2>
+            <p>120 Workers (80 Permanent, 60 Contract, 20 Probation)</p>
+        </div>
+        <div class="card">
+            <h2>Total Time Worked</h2>
+            <p>24hr 32min this week</p>
+            <div class="chart-container">
+                <canvas id="timeChart"></canvas>
+            </div>
+        </div>
+
+
+
+
+        <!-- Updated Attendance Form -->
+        <!-- Role-Based Attendance Input -->
+        <div class="attendance-section">
+            <h2>Attendance Input</h2>
+            <label for="date">Date</label>
+            <input type="date" id="date" />
+
+            <label for="id">Labor ID (optional)</label>
+            <input type="text" id="id" placeholder="Enter ID" />
+
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Enter Name" />
+
+            <label for="role">Role</label>
+            <select id="role">
+                <option value="Field Worker">Field Worker</option>
+                <option value="Feeder">Feeder</option>
+                <option value="Cleaner">Cleaner</option>
+                <option value="Irrigation">Irrigation</option>
+            </select>
+
+            <label for="status">Attendance Status</label>
+            <select id="status">
+                <option value="Present">Present</option>
+                <option value="Late">Late</option>
+                <option value="Absent">Absent</option>
+            </select>
+
+            <button onclick="submitAttendance()">Submit Attendance</button>
+        </div>
+
+
+
+        <div class="card">
+            <h2>Performance</h2>
+            <div class="chart-container">
+                <canvas id="perfMiniChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enlarged Present Labor Section -->
+    <div class="present-labor-section">
+        <h2>Present Labor Overview</h2>
+        <form id="attendanceForm">
+            <select id="farmSelect">
+                <option value="all">All Farms</option>
+                <option value="north">North Farm</option>
+                <option value="south">South Farm</option>
+            </select>
+            <select id="jobSelect">
+                <option value="all">All Job Types</option>
+                <option value="feeding">Feeding</option>
+                <option value="cleaning">Cleaning</option>
+                <option value="irrigation">Irrigation</option>
+            </select>
+            <select id="dateSelect">
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+                <option value="quarter">This Quarter</option>
+            </select>
+        </form>
+        <canvas id="presentLaborChart" height="120"></canvas>
+    </div>
+
+
+
+    <!-- Performance and Stats -->
+    <div class="performance-section">
+        <div class="performance-chart">
+            <h2>Workforce Performance</h2>
+            <canvas id="performanceChart"></canvas>
+        </div>
+        <div class="statistics-list">
+            <h2>All Statistics</h2>
+            <div class="stat-bar">
+                <div class="bar">
+                    <div class="bar-fill"></div>
+                </div>
+                <span>1200 Completed</span>
+            </div>
+            <div class="stat-bar">
+                <div class="bar">
+                    <div class="bar-fill" style="background:#999; width: 15%;"></div>
+                </div>
+                <span>142 Not Yet</span>
+            </div>
+            <hr style="margin: 1rem 0;">
+            <div class="employee-row">
+                <div class="employee-img"></div> Dean Huijsen <span class="green">↑ 178</span>
+            </div>
+            <div class="employee-row">
+                <div class="employee-img"></div> Kostas Jean <span class="green">↑ 195</span>
+            </div>
+            <div class="employee-row">
+                <div class="employee-img"></div> Fedrics Liam <span class="green">↑ 190</span>
+            </div>
+            <div class="employee-row">
+                <div class="employee-img"></div> Bradley Bare <span class="green">↑ 250</span>
+            </div>
+            <div class="employee-row">
+                <div class="employee-img"></div> Kevin Diks <span class="green">↑ 199</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <input type="text" placeholder="Search labor by name..." id="searchInput">
+        <button onclick="addLabor()">+ Add Labor</button>
+    </div>
+
+    <!-- Labor Table -->
+    <table class="labor-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Hour/d</th>
+                <th>Status</th>
+                <th>Task</th>
+                <th>Performance</th>
+                <th>Payroll</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="laborTable">
+            <tr>
+                <td>Suranto Prayitno</td>
+                <td>Field Worker</td>
+                <td>5h / day</td>
+                <td class="status-working">Working</td>
+                <td>Feeding</td>
+                <td>Good</td>
+                <td>$300/month</td>
+                <td class="actions"><button>Edit</button></td>
+            </tr>
+            <tr>
+                <td>Emil Baskhoro</td>
+                <td>Irrigation</td>
+                <td>6h / day</td>
+                <td class="status-leave">On Leave</td>
+                <td>Water Supply</td>
+                <td>Average</td>
+                <td>$280/month</td>
+                <td class="actions"><button>Edit</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Attendance Log Table -->
+    <div class="attendance-summary">
+        <h3>Attendance Log</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="attendanceLog">
+                <!-- Entries will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- JavaScript -->
+    <script>
+        function addLabor() {
+            alert('Add labor feature coming soon.');
+        }
+
+        document.getElementById("attendanceForm").addEventListener("change", function () {
+            const newData = {
+                labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                present: [12, 16, 18, 20, 22, 19, 15],
+                absent: [3, 5, 4, 6, 3, 5, 2]
+            };
+            updatePresentLaborChart(newData);
+        });
+
+        const presentLaborCtx = document.getElementById('presentLaborChart').getContext('2d');
+        let presentLaborChart = new Chart(presentLaborCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                datasets: [
+                    {
+                        label: 'Present',
+                        data: [10, 15, 12, 18, 20, 17, 14],
+                        backgroundColor: '#002920'
+                    },
+                    {
+                        label: 'Absent',
+                        data: [5, 3, 6, 4, 2, 4, 3],
+                        backgroundColor: '#b5d8b4'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: { mode: 'index', intersect: false }
+                },
+                scales: {
+                    x: { stacked: true },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        max: 50,
+                        title: {
+                            display: true,
+                            text: 'Number of Workers'
+                        }
+                    }
+                }
+            }
+        });
+
+        function updatePresentLaborChart(data) {
+            presentLaborChart.data.labels = data.labels;
+            presentLaborChart.data.datasets[0].data = data.present;
+            presentLaborChart.data.datasets[1].data = data.absent;
+            presentLaborChart.update();
+        }
+
+        const searchInput = document.getElementById("searchInput");
+        const laborTable = document.getElementById("laborTable");
+
+        searchInput.addEventListener("input", function () {
+            const filter = searchInput.value.toLowerCase();
+            const rows = laborTable.getElementsByTagName("tr");
+            for (let i = 0; i < rows.length; i++) {
+                const td = rows[i].getElementsByTagName("td")[0];
+                if (td) {
+                    const txtValue = td.textContent || td.innerText;
+                    rows[i].style.display = txtValue.toLowerCase().indexOf(filter) > -1 ? "" : "none";
+                }
+            }
+        });
+
+        new Chart(document.getElementById('performanceChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Performance',
+                    data: [10, 50, 70, 65, 80, 40, 30],
+                    fill: true,
+                    borderColor: '#00c853',
+                    tension: 0.3,
+                    backgroundColor: 'rgba(0, 200, 83, 0.1)',
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false }, tooltip: { enabled: true } },
+                scales: { y: { beginAtZero: true, suggestedMax: 100 }, x: {} }
+            }
+        });
+
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+            'August', 'September', 'October', 'November', 'December'];
+        const presentData = [8, 12, 16, 20, 18];
+        const absentData = [8, 10, 10, 24, 22];
+        for (let i = presentData.length; i < 12; i++) {
+            presentData.push(null);
+            absentData.push(null);
+        }
+
+        new Chart(document.getElementById('taskChart'), {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [
+                    {
+                        label: 'Present',
+                        data: presentData,
+                        backgroundColor: '#002920',
+                        stack: 'Stack 0',
+                    },
+                    {
+                        label: 'Absent',
+                        data: absentData,
+                        backgroundColor: '#b5d8b4',
+                        stack: 'Stack 0',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top', labels: { boxWidth: 12 } },
+                    tooltip: { mode: 'index', intersect: false }
+                },
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true, beginAtZero: true, max: 50 }
+                }
+            }
+        });
+        function submitAttendance() {
+            const date = document.getElementById("date").value;
+            const id = document.getElementById("id").value.trim();
+            const name = document.getElementById("name").value.trim();
+            const role = document.getElementById("role").value;
+            const status = document.getElementById("status").value;
+
+            if (!date || !name) {
+                alert("Date and Name are required.");
+                return;
+            }
+
+            const log = document.getElementById("attendanceLog");
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+        <td>${date}</td>
+        <td>${id || '-'}</td>
+        <td>${name}</td>
+        <td>${role}</td>
+        <td>${status}</td>
+      `;
+
+            log.appendChild(row);
+
+            // Clear inputs
+            document.getElementById("id").value = '';
+            document.getElementById("name").value = '';
+            document.getElementById("role").selectedIndex = 0;
+            document.getElementById("status").selectedIndex = 0;
+        }
+    </script>
+</body>
+
+</html>
