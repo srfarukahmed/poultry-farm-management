@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feed Management System</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+      color: #0b3d2e;
+    }
+
+    header {
+      background-color: #0b3d2e;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      margin-right: 1rem;
+    }
+
+    .banner {
+      text-align: center;
+      color: white;
+      position: relative;
+     background-image: url('../IntroImages/feed.jpg');
+      background-size: cover;
+      background-position: center;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 15px;
+      margin: 0 2rem -20px 2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      margin-top: 40px;
+      margin-bottom: 8px;
+    }
+
+    .banner h1 {
+      font-size: 5rem;
+      text-shadow: 2px 2px 4px #000;
+      text-transform: uppercase;
+      margin: 0;
+      
+    }
+
+    .banner p {
+      font-size: 2rem;
+      text-shadow: 1px 1px 3px #000;
+      margin-top: 0;
+    }
+
+    .container {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 15px;
+    }
+
+    .section {
+      background-color: white;
+      padding: 1.2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-left: 5px solid #0b3d2e;
+    }
+
+    .section h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #0b3d2e;
+    }
+
+    .icon {
+      font-size: 1.4rem;
+    }
+
+    .chart {
+      width: 100%;
+      height: 200px;
+    }
+
+ .footer {
+      background: #0d0d0d;
+      color: white;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    .footer span,
+    .footer a {
+      display: block;
+      color: white;
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+    }
+
+
+
+
+
+    .alert {
+      color: red;
+      font-weight: bold;
+    }
+
+    a {
+      color: #0b3d2e;
+      text-decoration: none;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <a href="#">HOME</a>
+      <a href="#">DASHBOARD</a>
+    </div>
+    <div>
+      <span>user2049</span>
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon"/>
+    </div>
+  </header>
+
+  <section class="banner">
+    <h1>feed management system</h1>
+    <p>Optimize your flock's nutrition, inventory, and feed schedules</p>
+  </section>
+
+  <section class="container">
+    <div class="section">
+      <h2><span class="icon">📊</span> Feed Consumption Monitoring</h2>
+      <canvas id="feedChart" class="chart"></canvas>
+    </div>
+
+    <div class="section">
+      <h2><span class="icon">⏰</span> Feed Scheduling</h2>
+      <ul>
+        <li><b>Broiler</b> (0–2 weeks): 8 AM, 2 PM, 8 PM</li>
+        <li><b>Broiler</b> (3–5 weeks): 7 AM, 1 PM, 7 PM</li>
+        <li><b>Layer</b> (6+ weeks): 6 AM, 12 PM, 6 PM</li>
+      </ul>
+      <a href="#">View Details</a>
+    </div>
+
+    <div class="section">
+      <h2><span class="icon">📦</span> Inventory Control</h2>
+      <p>Current Feed Stock: <strong>180 kg</strong> — <span class="alert">Low Stock</span></p>
+    </div>
+
+    <div class="section">
+      <h2><span class="icon">🧬</span> Nutritional Planning</h2>
+      <p>Stage: <a href="#">Grower</a></p>
+      <ul>
+        <li><strong>Protein:</strong> 20%</li>
+        <li><strong>Calcium:</strong> 1%</li>
+        <li><strong>Phosphorus:</strong> 0.5%</li>
+        <li><strong>Vitamin A:</strong> 10,000 IU/kg</li>
+      </ul>
+      <a href="#">View Details</a>
+    </div>
+
+    <div class="section">
+      <h2><span class="icon">🐣</span> Flock Overview</h2>
+      <p>Total Chickens: <strong>520</strong></p>
+      <p>Age Groups: Broiler (150), Grower (220), Layer (150)</p>
+    </div>
+
+    <div class="section">
+      <h2><span class="icon">🛠</span> System Alerts</h2>
+      <ul>
+        <li><span class="alert">⚠ Water Level Low in Section B</span></li>
+        <li><span class="alert">⚠ Feed Running Out in Silo 2</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div>
+      <span><strong>contact us</strong></span>
+      <span>✉ teaminnovatorsbd@gmail.com</span>
+      <span>📱 Telegram</span>
+      <span>👤 LinkedIn</span>
+    </div>
+    <div>
+      <span><strong>find us</strong></span>
+      <span>📍 United City, Madani Ave, Dhaka 1212</span>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('feedChart').getContext('2d');
+    const feedChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Feed Usage (kg)',
+          data: [120, 130, 140, 135, 150, 155, 145],
+          backgroundColor: 'rgba(11, 61, 46, 0.2)',
+          borderColor: '#0b3d2e',
+          borderWidth: 2,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: false
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
